@@ -12,6 +12,7 @@ set guioptions-=T
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set nu
 
 filetype on
 filetype plugin on
@@ -19,7 +20,7 @@ filetype indent on
 let g:pyflakes_use_quickfix=0
 
 " Put VIM swap files in one place
-set directory=~/.vim/swap
+set directory=/tmp/vimswap
 
 let mapleader = ","
 nmap <silent> ,/ :nohlsearch<CR>
@@ -73,6 +74,18 @@ set tags+=/~/source/qa/tlib/tags
 set tags+=/~/source/qa/tests/tags
 set tags+=/usr/local/lib/python2.6/tags
 
+" Comment out blocks of code
+function! CommentBlock(comment)
+  if getline(".") =~ '^'.a:comment.'\~'
+    call setline(".", substitute(getline("."), "^".a:comment.'\~ ', "", ""))
+  else
+    call setline(".", substitute(getline("."), "^", a:comment."~ ", ""))
+  endif
+endfunction
+
+autocmd FileType python map <Leader>/ :call CommentBlock('#')<CR> 
+autocmd FileType vim map <Leader>/ :call CommentBlock('"')<CR>
+
 " Shortcuts
 noremap <Leader>gg :silent Ggrep <cword><CR>:copen<CR>
 noremap <Leader>gG :copen<CR>:Ggrep 
@@ -93,3 +106,5 @@ inoremap <C-Space> <C-N>
 " Status bar
 set laststatus=2 " Enables the status line at the bottom of Vim
 set statusline=\ %F\ %m\ %{fugitive#statusline()}\ %=%l,%c\ 
+
+autocmd VimLeavePre * mksession! ~/.vim.sess
