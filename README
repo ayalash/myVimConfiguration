@@ -1,0 +1,4 @@
+After cloning this repository, you need to:
+1. $git submodule updtate --init --recursive
+2. $cd bundle/command-t
+   $rake make
