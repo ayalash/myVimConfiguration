@@ -18,7 +18,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
-autocmd VimEnter * nested TagbarOpen
+" autocmd VimEnter * nested TagbarOpen
 let g:pyflakes_use_quickfix=0
 let g:tagbar_left = 1
 
@@ -137,7 +137,7 @@ inoremap <C-Space> <C-N>
 set laststatus=2 " Enables the status line at the bottom of Vim
 set statusline=\ %F\ %m\ %{fugitive#statusline()}\ %=%l,%c\ 
 
-autocmd VimLeavePre * mksession! ~/.vim.sess
+" autocmd VimLeavePre * mksession! ~/.vim.sess
 
 set wildchar=<Tab> wildmenu wildmode=longest:full
 
